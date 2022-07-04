@@ -226,7 +226,7 @@ def main():
     #     u, s, vt = svds(train_data_matrix, k=k)
     #     # print(">>> ", s)
     #     s_diag_matrix = np.diag(s)
-    #     svd_prediction = np.dot(np.dot(u, s_diag_matrix), vt)
+    #     svd_prediction = np.linalg.multi_dot([u, s_diag_matrix, vt])
     #     r_rmse = rmse(svd_prediction, test_data_matrix)
     #     if r_rmse < minrmse:
     #         index = k
@@ -237,7 +237,7 @@ def main():
     u, s, vt = svds(train_data_matrix, k=index)
     # print(">>> ", s)
     s_diag_matrix = np.diag(s)
-    svd_prediction = np.dot(np.dot(u, s_diag_matrix), vt)
+    svd_prediction = np.linalg.multi_dot([u, s_diag_matrix, vt])
     r_rmse = rmse(svd_prediction, test_data_matrix)
     print("+++ k=%s, svd-shape: %s" % (index, np.shape(svd_prediction)) )
     print('>>> Model based CF RMSE: %s\n' %  minrmse)
